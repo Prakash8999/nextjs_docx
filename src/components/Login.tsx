@@ -33,7 +33,7 @@ const router = useRouter()
 				}
 			}).then((res) => {
 				console.log(res);
-router.push('/')
+router.push	('/dashboard')
 			
 				setLoading(false)
 			}).catch((err) => {

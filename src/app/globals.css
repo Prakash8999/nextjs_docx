@@ -8,3 +8,13 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+ql-blank{
+  border: none !important;
+}
+
+.ql-container.ql-snow{
+  border: none !important;
+}
+.ql-container{
+  height: 80vh !important;
+}
