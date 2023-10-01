@@ -25,7 +25,9 @@ export const config = {
 	matcher: [
 	  // '/:path*',
 	  '/',
-	  '/dashboard',
+	  '/dashboard/:path*',
+	  
+
 	  '/auth/:path*',
 	  '/signup'
 	]

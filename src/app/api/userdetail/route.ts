@@ -12,6 +12,7 @@ try {
 		id:true,
 		name:true,
 		email:true,
+		profile:true,
 		password:false
 	}})
 

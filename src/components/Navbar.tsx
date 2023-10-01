@@ -1,9 +1,14 @@
 'use client'
+import Link from 'next/link'
 import React,{useEffect, useState} from 'react'
 import { FaDochub } from 'react-icons/fa'
+import { TypeAnimation } from 'react-type-animation'
 
-const Navbar = (data:any) => {
-	console.log(data);
+
+const Navbar = (data:any, className:any) => {
+	console.log(data)
+	console.log(data?.profile);
+	
 	const [loading, setLoading] = useState(false)
 // 	useEffect(() => {
 	  
@@ -20,11 +25,33 @@ const Navbar = (data:any) => {
   return (
 	<>
 	
-	<nav className=' mt-3 px-5  w-full'>
+	<nav className={`mt-2 px-5  w-full  ${className}`}>
 <div className='flex justify-between  items-center'>
 
-		<div>
-<FaDochub className={'text-blue-600 text-3xl '}/>
+		<div className='flex'>
+			<Link href={'/dashboard'}>
+<FaDochub className={'text-blue-600 text-4xl '}/>
+			</Link>
+
+<div className=' flex items-center gap-x-3 ml-3'>
+
+{/* <TypeAnimation
+sequence={[
+	`Hello! ${data?.data ? data?.data?.user?.name : 'User'} `,
+	1000,
+
+	
+	
+	
+]}
+// repeat={Infinity}
+
+/> */}
+<Link href={'/dashboard/profile'}>Profile </Link>
+<Link href={'/dashboard/mydocx'}> Docx</Link>
+
+
+</div>
 		</div>
 		
 		<div className='w-[50vw]'>
@@ -41,11 +68,19 @@ const Navbar = (data:any) => {
 							</div>
 
 		</div>
-		<div className='border px-2 py-1.5 rounded-md border-black	'>
+
+
+
+		<Link href={'/dashboard/profile'}
+			 className='border px-2 h-10 rounded-md border-black	flex items-center gap-x-2'>
+		 
+		 <img src={data?.data?.user?.profile} alt="P"  className='w-8 h-8 rounded-full'/>
+		 	<p>
 			{
 				`${data?.data}` ? `${data?.data?.user?.name}` :'loading...'
-			}
-		</div>
+			}	
+			</p>
+		</Link>
 </div>
 	</nav>
 	</>

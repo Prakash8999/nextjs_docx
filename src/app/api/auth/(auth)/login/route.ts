@@ -6,15 +6,18 @@ import jwt from 'jsonwebtoken'
 
 export async function POST(request:NextRequest){
 try {
+
 	const {email, password} = await request.json()
-let user = await prisma.user.findUnique({
-	where:{
-		email
+	
+	let user = await prisma.user.findUnique({
+		where:{
+			email
+		}
+	})
+	if (!user) {
+		return NextResponse.json({ message: "User Does not exist" }, { status: 400 })
 	}
-})
-if (!user) {
-	return NextResponse.json({ message: "User Does not exist" }, { status: 400 })
-}
+	console.log(user?.profile);
 
 const isMatched = await bcrypt.compare(password, user.password)
 if (!isMatched) {
@@ -24,7 +27,8 @@ if (!isMatched) {
 const tokenData ={
 	id:user.id,
 	name:user.name,
-	email:user.email
+	email:user.email,
+	profile:user.email	
 }
 
 const token = await jwt.sign(tokenData, String(process.env.SECRET_KEY))

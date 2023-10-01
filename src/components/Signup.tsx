@@ -14,35 +14,92 @@ const Signup = () => {
 	const [viewPassword, setViewPassword] = useState(false)
 	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
+	const [profile, setProfile]= useState<File | null >(null)
 	const [password, setPassword] = useState('')
 
 
-	const handleSignup = (e: any) => {
-		setLoading(true)
-		e.preventDefault()
-		try {
-			axios('/api/auth/register', {
-				method: "POST",
-				data: {
-					name, email, password
-				}
-			}).then((res) => {
-				console.log(res);
-				setLoading(false)
-			}).catch((err) => {
-				console.log(err);
-				setLoading(false)
-			})
 
-		} catch (error) {
-			console.log(error);
+// 	const handleSignup = (e: any) => {
+// 	e.preventDefault()
+
+// 	if (profile) {
+// 	setLoading(true)
+// 	const formData = new FormData()
+// formData.append("file", profile)
+// formData.append("upload_preset", "socialmedia")
+// formData.append("folder", "socialmedia")
+
+
+// 	fetch('https://api.cloudinary.com/v1_1/dtu9gszzu/image/upload',{
+// 		method:"POST",
+// 		body:formData
+	
+// 	})
+	
+// 	.then((response) => response.json())
+// 	.then((res)=>{
+// 		console.log(res?.secure_url);
+// 		console.log(res);
+	
+// 		try {
+// 				axios('/api/auth/register', {
+// 					method: "POST",
+// 					data: {
+// 						name, email, password, profile:String(res?.secure_url)
+// 					}
+// 				}).then((res) => {
+// 					console.log(res);
+// 					setLoading(false)
+// 				}).catch((err) => {
+// 					console.log(err);
+// 					setLoading(false)
+// 				})
+		
+// 			} catch (error) {
+// 				console.log(error);
+// 				setLoading(false)
+// 			}
+
+	
+// 	})
+	
+	
+// 	.catch((error)=>{
+// 	console.log(error);
+	
+// 	})	
+// }
+
+
+
+
+// 	}
+
+
+
+	const handleSignup = (e:any) =>{
+	setLoading(true)
+	e.preventDefault()
+	try {
+		axios('/api/auth/register', {
+			method: "POST",
+			data: {
+				name, email, password
+			}
+		}).then((res) => {
+			console.log(res);
 			setLoading(false)
-		}
+		}).catch((err) => {
+			console.log(err);
+			setLoading(false)
+		})
 
+	} catch (error) {
+		console.log(error);
+		setLoading(false)
 	}
-
-
-
+	}
+	
 	return (
 		<>
 			<section className="flex">
@@ -55,6 +112,30 @@ const Signup = () => {
 					<form className='' onSubmit={handleSignup} aria-readonly>
 
 						<h1 className="text-blue-600 font-semibold text-3xl text-center mb-8">SuperDocs</h1>
+
+
+						{/* <div className="mb-2">
+							<label
+								htmlFor="name"
+								className="block text-gray-700 text-sm font-medium mb-1"
+							>
+								profile
+							</label>
+							<input
+
+								type="file"
+								accept="image/png, image/jpeg, image/jpg"
+								id="profile"
+								className="border border-gray-300 rounded-lg py-2 px-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-300"
+						// value={profile}
+								onChange={(e)=>{
+									setProfile(e.target.files ? e.target.files[0] : null)
+								}}
+						required
+								readOnly= {loading}
+							/>
+
+						</div> */}
 
 
 						<div className="mb-2">
