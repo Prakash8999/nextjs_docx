@@ -8,6 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 import Lottie from 'lottie-react'
 import signup from '../assets/Signup.json'
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 const Signup = () => {
 
 	const [loading, setLoading] = useState(false)
@@ -74,7 +75,7 @@ const Signup = () => {
 
 
 // 	}
-
+const router = useRouter()
 
 
 	const handleSignup = (e:any) =>{
@@ -89,6 +90,8 @@ const Signup = () => {
 		}).then((res) => {
 			console.log(res);
 			setLoading(false)
+			router.push('/auth/login')
+			alert('account created')
 		}).catch((err) => {
 			console.log(err);
 			setLoading(false)

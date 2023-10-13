@@ -9,7 +9,8 @@ import Lottie from 'lottie-react'
 import signin from '../assets/signin.json'
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-
+import { ToastContainer, toast } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 // import { decode } from "jsonwebtoken"
 
 
@@ -32,10 +33,20 @@ const router = useRouter()
  email, password
 				}
 			}).then((res) => {
+				router.push	('/dashboard')
 				console.log(res);
-router.push	('/dashboard')
 			
 				setLoading(false)
+				toast.success(res?.data?.message,{
+					position: "top-center",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "light",
+				})
 			}).catch((err) => {
 				console.log(err);
 				setLoading(false)
@@ -148,10 +159,11 @@ router.push	('/dashboard')
 
 				</div>
 
-				<div className='w-1/2 flex justify-center items-center bg-yellow-500 min-h-screen '>
+				<div className='w-1/2 flex justify-center items-center bg-blue-600 min-h-screen '>
 					<Lottie className='w-[80%] h-[80%] md:block hidden' animationData={signin} />
 				</div>
 			</section>
+			<ToastContainer/>
 		</>
 	)
 }

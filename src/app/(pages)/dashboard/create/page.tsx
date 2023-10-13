@@ -1,12 +1,12 @@
 'use client'
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { FaDochub } from 'react-icons/fa'
 import { FiPrinter } from 'react-icons/fi'
-
+import { io , Socket} from "socket.io-client";
 import Spinner from "components/Spinner";
 import AddCollaborators from "app/Modal/AddCollaborators";
 import { useAuth } from "context/authContext";
@@ -14,13 +14,13 @@ import { BsSearch, BsShare } from "react-icons/bs";
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineSend } from "react-icons/ai";
-
+// import {io}
 
 
 const modules = {
 
   toolbar: [
-    [{ header: [1, 2, false] }],
+    [{ header: [1, 2,3,4, false] }],
     ["bold", "italic", "underline", "strike", "blockquote"],
     [
       { list: "ordered" },
@@ -75,7 +75,7 @@ const Create = () => {
   const [title, setTitle] = useState('Untitled Document')
   const router = useRouter();
 const [modal,setModal] = useState({ show:false})
-
+// const [socket, setSocket] = useState<Socket>(io("http://localhost:3000"));  
 // console.log(account);
 // interface Data  {
 //   name:string,
@@ -95,6 +95,43 @@ useEffect(() => {
   
   })
   }, [])
+
+
+
+  const handleSubmit = (e:any)=>{
+e.preventDefault()
+console.log(title, summary, content);
+
+try {
+  
+  axios('/api/docx/create',{
+    method:"POST",
+data:{
+  title:title,
+  summary:summary,
+  content:content
+
+}
+  })
+  .then((res)=>{
+console.log(res);
+
+  })
+
+
+} catch (error) {
+  
+}
+  }
+
+  
+  // useEffect(() => {
+  //   return () => {
+  //     if (socket) {
+  //       socket.disconnect();
+  //     }
+  //   };
+  // }, [socket]);
 
 
   return (
@@ -137,6 +174,9 @@ useEffect(() => {
     <BsSearch className= {'cursor-pointer'}/>
   
   <BsShare className= {'cursor-pointer'}/>
+  <button type="button" onClick={handleSubmit}>
+    Save
+  </button>
 
 </div>
 
@@ -170,7 +210,13 @@ useEffect(() => {
 
               <div className="w-full  bg-white">
                 <p className="text-center pt-1 underline underline-offset-4">Summary</p>
-                <textarea className="w-full h-full outline-none resize-none pl-2" />
+                <textarea className="w-full h-full outline-none resize-none pl-2"
+                value={summary}
+
+                onChange={(e)=>{
+                  setSummary(e.target.value)
+                }}
+                />
               </div>
 
 
@@ -199,7 +245,7 @@ useEffect(() => {
 
 
 <input type="text" className=" h-10 border border-black rounded-lg outline-none  pl-2" placeholder="Send Message.."/>
-<button type="button">
+<button type="button" >
 <AiOutlineSend className ={ 'text-3xl text-green-500'}/>
   
 </button>
@@ -218,6 +264,7 @@ useEffect(() => {
                 onChange={(value) => {
                   setContent(value);
                 }}
+                
                 className="min-h-[80vh] w-full h-auto border-white no-underline"
               />
 
