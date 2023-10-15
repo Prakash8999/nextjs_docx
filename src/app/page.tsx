@@ -14,12 +14,12 @@ export default function Home() {
 
 
   
-    <div className='h-auto w-auto flex items-center'>
+    <div className='h-full justify-center w-full flex items-center'>
 
     
 
 
-    <Lottie animationData={animation_lndg5gzn} className='w-2/3 h-[70%]  '/>
+    {/* <Lottie animationData={animation_lndg5gzn} className='w-2/3 h-[70%]  '/> */}
     <div className='relative flex flex-col gap-y-5 items-center justify-center w-1/4  shadow-2xl rounded-lg h-[60vh] '>
 <div className='absolute text-center top-4'>
 

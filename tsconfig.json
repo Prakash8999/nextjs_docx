@@ -23,6 +23,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/Spinner.jsx", "src/context/authContext.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/Spinner.jsx", "src/context/authContext.tsx", ".next/types/app/(pages)/dashboard/page.tsx", ".next/types/app/(pages)/dashboard/update/page.tsx", ".next/types/app/(pages)/dashboard/update/[id]/page.tsx"],
   "exclude": ["node_modules"]
 }

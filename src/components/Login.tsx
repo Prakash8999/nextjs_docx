@@ -130,7 +130,7 @@ theme: "light",
 							disabled={loading}
 							className="bg-blue-500 hover:bg-blue-600  text-white font-semibold py-2 px-4 rounded-lg w-full transition-colors duration-300 "
 						>
-							{loading ? <Spinner className={''} /> : 'Signup'}
+							{loading ? <Spinner className={'w-8 h-8'} /> : 'Login'}
 						</button>
 
 					</form>
