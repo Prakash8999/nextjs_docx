@@ -166,14 +166,16 @@ dele(value?.id)
 									{
 										docxData?.map((value, index) => {
 											return (
-												<Link key={index} className='border border-black  rounded-xl px-3 p-3 bg-amber-300' href={`/dashboard/update/${value?.id}`} >
+												<div key={index} className='border border-black  rounded-xl px-3 p-3 bg-amber-300'  >
 
-
+{/*  */}
 													<div className='flex justify-between'>
+<Link href={`/dashboard/update/${value?.id}`}>
 
-														<h1 className='font-semibold text-xl'> {value?.title}</h1>
+														<h1 className='font-semibold text-xl'> {"value?.title"}</h1>
 
-
+														<p className='text-sm'>{format(new Date(value?.createdAt), 'MMMM dd, yyyy h:mm')}</p>
+</Link>
 														<div className='relative'>
 
 
@@ -205,10 +207,10 @@ dele(value?.id)
 													</div>
 
 
-													<p>{format(new Date(value?.createdAt), 'MMMM dd, yyyy h:mm:ss')}</p>
+													
 
 
-												</Link>
+												</div>
 											)
 
 										})
@@ -235,24 +237,6 @@ dele(value?.id)
 
 
 
-					{/* <div className='h-[45%] '>
-		<p className='text-xl py-2'>Start New Document </p>
-<div className=' w-full flex justify-between h-full' >
-<Link href={'/dashboard/create'} className=' w-1/5 h-full  bg-white flex justify-center items-center'>
-<HiOutlinePlus className={'text-7xl  text-blue-600  text-center'}/>
-</Link>
-</div>
-</div>
-<div className='flex overflow-x-auto gap-x-6   '>
-
-ddd
-  {docxData.map((value, index) => (
-    <div key={index} className='border border-black h-full w-1/5 px-4 py-2 overflow-hidden bg-white'>
-      <div className='underline underline-offset-4 text-center '>{value?.title}</div>
-      
-    </div>
-  ))}
-</div> */}
 
 
 				</div>

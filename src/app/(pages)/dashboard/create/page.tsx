@@ -6,7 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { FaDochub } from 'react-icons/fa'
 import { FiPrinter } from 'react-icons/fi'
-import { io , Socket} from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 import Spinner from "components/Spinner";
 import AddCollaborators from "app/Modal/AddCollaborators";
 import { useAuth } from "context/authContext";
@@ -20,7 +20,7 @@ import { AiOutlineSend } from "react-icons/ai";
 const modules = {
 
   toolbar: [
-    [{ header: [1, 2,3,4, false] }],
+    [{ header: [1, 2, 3, 4, false] }],
     ["bold", "italic", "underline", "strike", "blockquote"],
     [
       { list: "ordered" },
@@ -30,7 +30,7 @@ const modules = {
     ],
 
     ["clean"],
-    ["link", "image", "video",  "background", "code-block",],
+    ["link", "image", "video", "background", "code-block",],
     ["direction", "align"],
   ],
 };
@@ -51,80 +51,80 @@ const modules = {
 //   ],
 // };
 const formats = [
-  'font','size',
-  'bold','italic','underline','strike',
-  'color','background',
+  'font', 'size',
+  'bold', 'italic', 'underline', 'strike',
+  'color', 'background',
   'script',
-  'header','blockquote','code-block',
-  'indent','list',
-  'direction','align',
-  'link','image','video','formula',
+  'header', 'blockquote', 'code-block',
+  'indent', 'list',
+  'direction', 'align',
+  'link', 'image', 'video', 'formula',
 ]
 const Create = () => {
-  const {account}:any = useAuth()
-  interface Data  {
-    name:string,
-    email:string,
-    profile:string
+  const { account }: any = useAuth()
+  interface Data {
+    name: string,
+    email: string,
+    profile: string
   }
-  
-  const[data, setData]  = useState<Data | null>(null);
+
+  const [data, setData] = useState<Data | null>(null);
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false)
   const [title, setTitle] = useState('Untitled Document')
   const router = useRouter();
-const [modal,setModal] = useState({ show:false})
-// const [socket, setSocket] = useState<Socket>(io("http://localhost:3000"));  
-// console.log(account);
-// interface Data  {
-//   name:string,
-//   email:string
-// }
+  const [modal, setModal] = useState({ show: false })
+  // const [socket, setSocket] = useState<Socket>(io("http://localhost:3000"));  
+  // console.log(account);
+  // interface Data  {
+  //   name:string,
+  //   email:string
+  // }
 
-useEffect(() => {
-  axios('/api/userdetail',{
-  method:"GET"
-  }).then((res)=>{
-  console.log(res?.data?.user?.name);
-  // setAccount(res?.data)
-  setData(res?.data?.user)
-  
-  }).catch((err)=>{
-  console.log(err);
-  
-  })
+  useEffect(() => {
+    axios('/api/userdetail', {
+      method: "GET"
+    }).then((res) => {
+      console.log(res?.data?.user?.name);
+      // setAccount(res?.data)
+      setData(res?.data?.user)
+
+    }).catch((err) => {
+      console.log(err);
+
+    })
   }, [])
 
 
 
-  const handleSubmit = (e:any)=>{
-e.preventDefault()
-console.log(title, summary, content);
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+    console.log(title, summary, content);
 
-try {
-  
-  axios('/api/docx/create',{
-    method:"POST",
-data:{
-  title:title,
-  summary:summary,
-  content:content
+    try {
 
-}
-  })
-  .then((res)=>{
-console.log(res);
+      axios('/api/docx/create', {
+        method: "POST",
+        data: {
+          title: title,
+          summary: summary,
+          content: content
 
-  })
+        }
+      })
+        .then((res) => {
+          console.log(res);
+
+        })
 
 
-} catch (error) {
-  
-}
+    } catch (error) {
+
+    }
   }
 
-  
+
   // useEffect(() => {
   //   return () => {
   //     if (socket) {
@@ -136,9 +136,9 @@ console.log(res);
 
   return (
     <>
-{
-  modal.show && <AddCollaborators  data={modal.show } setModal= {setModal}/>
-}
+      {
+        modal.show && <AddCollaborators data={modal.show} setModal={setModal} />
+      }
 
 
       <div className="bg-[#F8F8F8] pb-2 overflow-hidden">
@@ -150,10 +150,10 @@ console.log(res);
         >
           <div className="pt-2 px-5 flex items-center justify-between">
             <div className="flex items-center gap-x-3">
-<Link href={'/dashboard'}>
+              <Link href={'/dashboard'}>
 
-              <FaDochub className={'text-blue-600 text-4xl '} />
-</Link>
+                <FaDochub className={'text-blue-600 text-4xl '} />
+              </Link>
               <input
                 type={"text"}
                 placeholder={"Title"}
@@ -165,20 +165,20 @@ console.log(res);
               />
 
             </div>
-<div className="flex items-center gap-x-6 text-xl">
+            <div className="flex items-center gap-x-6 text-xl">
 
-  
-<FiPrinter className= {'cursor-pointer'}/>
 
-  
-    <BsSearch className= {'cursor-pointer'}/>
-  
-  <BsShare className= {'cursor-pointer'}/>
-  <button type="button" onClick={handleSubmit}>
-    Save
-  </button>
+              <FiPrinter className={'cursor-pointer'} />
 
-</div>
+
+              <BsSearch className={'cursor-pointer'} />
+
+              <BsShare className={'cursor-pointer'} />
+              <button type="button" onClick={handleSubmit}>
+                Save
+              </button>
+
+            </div>
 
             {/* <div className='border  rounded-md border-black px-3	py-1'>
             {/* {data?.} */}
@@ -187,14 +187,14 @@ console.log(res);
 
 
             <Link href={'/dashboard/profile'} className='border px-2 h-10 rounded-md border-black	flex items-center gap-x-2'>
-		 
-		 <img src={data?.profile} alt=""  className='w-8 h-8 rounded-full'/>
-		 	<p>
-			{
-				`${data?.name}` ? `${data?.name}` :'loading...'
-			}	
-			</p>
-		</Link>
+
+              <img src={data?.profile} alt="" className='w-8 h-8 rounded-full' />
+              <p>
+                {
+                  `${data?.name}` ? `${data?.name}` : 'loading...'
+                }
+              </p>
+            </Link>
 
 
 
@@ -211,11 +211,11 @@ console.log(res);
               <div className="w-full  bg-white">
                 <p className="text-center pt-1 underline underline-offset-4">Summary</p>
                 <textarea className="w-full h-full outline-none resize-none pl-2"
-                value={summary}
+                  value={summary}
 
-                onChange={(e)=>{
-                  setSummary(e.target.value)
-                }}
+                  onChange={(e) => {
+                    setSummary(e.target.value)
+                  }}
                 />
               </div>
 
@@ -225,33 +225,33 @@ console.log(res);
               ">
 
                 <div className=" flex justify-center items-center gap-x-3">
-                <p className=" text-center py-1.5 underline underline-offset-4">Contributors</p>
-                <button type="button" onClick={()=>{
-                  setModal({show:true})
-                }} className="text-4xl">+</button>
+                  <p className=" text-center py-1.5 underline underline-offset-4">Contributors</p>
+                  <button type="button" onClick={() => {
+                    setModal({ show: true })
+                  }} className="text-4xl">+</button>
 
                 </div>
-              {/* <div className="flex items-center gap-x-4 pl-3 text-xl font-medium">1) 
+                {/* <div className="flex items-center gap-x-4 pl-3 text-xl font-medium">1) 
               
               <img src={data?.profile} alt="P"  className="object-cover w-10 h-10 rounded-full"/>
               <p>
               { data?.email ? data.email : 'Loading....' }</p> <p>
                 (You)
                 </p></div> */}
-<div className=" absolute bottom-4  w-full" >
-<div className=" rounded-md flex items-center justify-center gap-x-2">
+                <div className=" absolute bottom-4  w-full" >
+                  <div className=" rounded-md flex items-center justify-center gap-x-2">
 
 
 
 
-<input type="text" className=" h-10 border border-black rounded-lg outline-none  pl-2" placeholder="Send Message.."/>
-<button type="button" >
-<AiOutlineSend className ={ 'text-3xl text-green-500'}/>
-  
-</button>
-</div>
+                    <input type="text" className=" h-10 border border-black rounded-lg outline-none  pl-2" placeholder="Send Message.." />
+                    <button type="button" >
+                      <AiOutlineSend className={'text-3xl text-green-500'} />
 
-</div>
+                    </button>
+                  </div>
+
+                </div>
               </div>
 
               <hr />
@@ -264,7 +264,7 @@ console.log(res);
                 onChange={(value) => {
                   setContent(value);
                 }}
-                
+
                 className="min-h-[80vh] w-full h-auto border-white no-underline"
               />
 
