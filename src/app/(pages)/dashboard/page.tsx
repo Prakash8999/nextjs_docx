@@ -172,7 +172,7 @@ dele(value?.id)
 													<div className='flex justify-between'>
 <Link href={`/dashboard/update/${value?.id}`}>
 
-														<h1 className='font-semibold text-xl'> {"value?.title"}</h1>
+														<h1 className='font-semibold text-xl'> {value?.title}</h1>
 
 														<p className='text-sm'>{format(new Date(value?.createdAt), 'MMMM dd, yyyy h:mm')}</p>
 </Link>

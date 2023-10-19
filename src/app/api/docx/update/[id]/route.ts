@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../../../prisma/index";
 import { json } from "stream/consumers";
-export async function PATCH(request:NextRequest) {
+export async function PATCH(request:NextRequest, {params}:any) {
 	try {
-		const {title, content, summary, id} =await request.json()
+		const {id} :any = params;
+		const {title, content, summary} =await request.json()
+		console.log(id);
+		
 		const updateData= await prisma.docx.update({
 			where:{id:id}, data :{
 				title:title,
